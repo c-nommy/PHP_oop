@@ -30,4 +30,21 @@ class Todo
         $stmt = $this->db_manager->dbh->prepare('INSERT INTO ' . $this->table . ' (name) VALUES (?)');
         $stmt->execute([$name]);
     }
+
+    public function getAll()
+    {
+
+        //実行するSQLを準備
+        $stmt = $this->db_manager->dbh->prepare('SELECT * FROM ' . $this->table);
+        //準備してSQLを実行する
+        $stmt->execute();
+        //実行結果を取得する
+        $tasks = $stmt->fetchAll();
+
+        // return === 関数の呼び出し元に、値を返す
+        return $tasks;
+    }
 }
+
+
+
